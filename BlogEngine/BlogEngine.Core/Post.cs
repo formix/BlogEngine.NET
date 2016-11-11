@@ -127,7 +127,7 @@
             this.tags = new StateList<string>();
             this.notificationEmails = new StateList<string>();
             this.DateCreated = new DateTime();
-            this.isPublished = true;
+            this.isPublished = false;
             this.hasCommentsEnabled = true;
         }
 

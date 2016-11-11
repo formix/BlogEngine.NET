@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
+using BlogEngine.Core.Services.Integration;
+using System.Threading.Tasks;
 
 namespace BlogEngine.Core.Data
 {
@@ -143,6 +145,9 @@ namespace BlogEngine.Core.Data
 
         static void Save(Post post, PostDetail detail)
         {
+            var publishing = !post.IsPublished && detail.IsPublished;
+            var updatePusblished = post.IsPublished && detail.IsPublished;
+
             post.Title = detail.Title;
             post.Author = string.IsNullOrEmpty(detail.Author) ? Security.CurrentUser.Identity.Name : detail.Author;
             post.Description = GetDescription(detail.Description, detail.Content);
@@ -160,6 +165,17 @@ namespace BlogEngine.Core.Data
             UpdatePostTags(post, FilterTags(detail.Tags));
 
             post.Save();
+
+            // TODO: Use a factory instead of creating the object directly.
+            var socialPublisher = new YammerPublisher();
+            if (publishing)
+            {
+                socialPublisher.PublishNew(post);
+            }
+            else if (updatePusblished)
+            {
+                socialPublisher.PublishUpdate(post);
+            }
         }
 
         static void UpdatePostCategories(Post post, List<CategoryItem> categories)

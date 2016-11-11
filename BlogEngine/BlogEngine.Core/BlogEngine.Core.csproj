@@ -139,7 +139,9 @@
     <Compile Include="Data\Yammer\Settings.cs" />
     <Compile Include="Data\Yammer\Stats.cs" />
     <Compile Include="Data\Yammer\User.cs" />
+    <Compile Include="Data\Yammer\YammerMessage.cs" />
     <Compile Include="Data\Yammer\YammerToken.cs" />
+    <Compile Include="Services\Integration\YammerPublisher.cs" />
     <Compile Include="Web\HttpHandlers\YammerSingleSignOn.cs" />
     <Compile Include="Services\Syndication\BlogML\BaseReader.cs" />
     <Compile Include="Services\Syndication\BlogML\BlogImporter.cs" />
