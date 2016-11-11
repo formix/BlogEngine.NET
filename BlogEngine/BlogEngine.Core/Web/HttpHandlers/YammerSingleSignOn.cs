@@ -41,7 +41,7 @@
             {
                 if (_clientId == null)
                 {
-                    _clientId = Environment.GetEnvironmentVariable("VOICES_CLIENT_ID") ?? "";
+                    _clientId = Environment.GetEnvironmentVariable("APPSETTING_voicesClientId") ?? "";
                 }
                 return _clientId;
             }
@@ -56,7 +56,7 @@
             {
                 if (_clientSecret == null)
                 {
-                    _clientSecret = Environment.GetEnvironmentVariable("VOICES_CLIENT_SECRET") ?? "";
+                    _clientSecret = Environment.GetEnvironmentVariable("APPSETTING_voicesClientSecret") ?? "";
                 }
                 return _clientSecret;
             }
