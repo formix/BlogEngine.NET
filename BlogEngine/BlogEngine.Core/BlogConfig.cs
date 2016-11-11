@@ -230,6 +230,7 @@ namespace BlogEngine.Core
                 {
                     string setting = WebConfigurationManager.AppSettings["BlogEngine.SingleSignOn"] ?? "false";
 
+                    _singleSignOn = false;
                     if (!string.IsNullOrEmpty(setting))
                     {
                         bool value;
@@ -238,7 +239,6 @@ namespace BlogEngine.Core
                             _singleSignOn = value;
                         }
                     }
-                    _singleSignOn = false;
                 }
                 return (bool)_singleSignOn;
             }

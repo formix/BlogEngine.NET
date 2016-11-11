@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Security;
+using System.Text.RegularExpressions;
+using BlogEngine.Core.Web.HttpHandlers;
 
 namespace BlogEngine.Core
 {
@@ -47,59 +49,82 @@ namespace BlogEngine.Core
         {
             // default to an empty/unauthenticated user to assign to context.User.
             CustomIdentity identity = new CustomIdentity(string.Empty, false);
-            CustomPrincipal principal = new CustomPrincipal(identity); 
-            
+            CustomPrincipal principal = new CustomPrincipal(identity);
+
             var context = ((HttpApplication)sender).Context;
+
+            if (context.Request.Url.AbsolutePath.Contains("login.sso"))
+            {
+                context.User = principal;
+                return;
+            }
 
             // FormsAuthCookieName is a custom cookie name based on the current instance.
             HttpCookie authCookie = context.Request.Cookies[FormsAuthCookieName];
-            if (authCookie != null)
+
+            if (authCookie == null)
             {
-                Blog blog = Blog.CurrentInstance;
+                // unauthenticated request are not allowed
+                var authUrl = string.Format(
+                    "https://www.yammer.com/oauth2/authorize?client_id={0}&response_type=code&redirect_uri=https://elogicvoices.azurewebsites.net/login.sso?returnUrl={1}",
+                    YammerSingleSignOn.ClientId,
+                    context.Request.Url.AbsolutePath);
+                context.Response.Redirect(authUrl);
+                context.Response.End();
+                return;
+            }
 
-                FormsAuthenticationTicket authTicket = null;
-                try
-                {
-                    authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-                }
-                catch (Exception ex)
-                {
-                    context.Request.Cookies.Remove(FormsAuthCookieName);
-                    authTicket = null;
+            Blog blog = Blog.CurrentInstance;
 
-                    Utils.Log("Failed to decrypt the FormsAuthentication cookie.", ex);
-                }
+            FormsAuthenticationTicket authTicket = null;
+            try
+            {
+                authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            }
+            catch (Exception ex)
+            {
+                context.Request.Cookies.Remove(FormsAuthCookieName);
+                authTicket = null;
 
-                if (authTicket != null)
+                Utils.Log("Failed to decrypt the FormsAuthentication cookie.", ex);
+            }
+
+            if (authTicket != null)
+            {
+                identity = new CustomIdentity(authTicket.Name, true);
+
+                if (!string.IsNullOrWhiteSpace(authTicket.UserData))
                 {
-                    identity = new CustomIdentity(authTicket.Name, true); 
-                    
-                    if (!string.IsNullOrWhiteSpace(authTicket.UserData))
+                    int delimiter = authTicket.UserData.IndexOf(AUTH_TKT_USERDATA_DELIMITER);
+                    if (delimiter != -1)
                     {
-                        int delimiter = authTicket.UserData.IndexOf(AUTH_TKT_USERDATA_DELIMITER);
-                        if (delimiter != -1)
+                        // for extra security, make sure the data in UserData contains the SecurityValidationKey
+                        // and current blog instance.  the current blog instance check would prevent a cookie name
+                        // change for a forms auth cookie encrypted in the same application (different blog) as
+                        // being valid for this blog instance.
+
+                        string[] userData = Regex.Split(
+                            authTicket.UserData,
+                            AUTH_TKT_USERDATA_DELIMITER.Replace("|", "\\|"));
+
+                        string securityValidationKey = userData[0];
+                        string blogId = userData[1];
+                        string extraUserData = userData.Length == 3 ? userData[2] : "";
+
+                        if (securityValidationKey.Equals(SecurityValidationKey, StringComparison.OrdinalIgnoreCase) &&
+                            blogId.Equals(Blog.CurrentInstance.Id.ToString(), StringComparison.OrdinalIgnoreCase))
                         {
-                            // for extra security, make sure the data in UserData contains the SecurityValidationKey
-                            // and current blog instance.  the current blog instance check would prevent a cookie name
-                            // change for a forms auth cookie encrypted in the same application (different blog) as
-                            // being valid for this blog instance.
-
-                            string securityValidationKey = authTicket.UserData.Substring(0, delimiter).Trim();
-                            string blogId = authTicket.UserData.Substring(delimiter + AUTH_TKT_USERDATA_DELIMITER.Length).Trim();
-
-                            if (securityValidationKey.Equals(SecurityValidationKey, StringComparison.OrdinalIgnoreCase) &&
-                                blogId.Equals(Blog.CurrentInstance.Id.ToString(), StringComparison.OrdinalIgnoreCase))
-                            {
-                                principal = new CustomPrincipal(identity);
-                            }
+                            identity.UserData = extraUserData;
+                            principal = new CustomPrincipal(identity);
                         }
                     }
-                    else if (BlogConfig.SingleSignOn)
-                    {
-                        principal = new CustomPrincipal(identity);
-                    }
+                }
+                else if (BlogConfig.SingleSignOn)
+                {
+                    principal = new CustomPrincipal(identity);
                 }
             }
+
             context.User = principal;
         }
 
@@ -135,6 +160,7 @@ namespace BlogEngine.Core
             Blog.CurrentInstance.Cache.Remove(cacheKey);
         }
 
+
         /// <summary>
         /// Attempts to sign the user into the current blog instance.
         /// </summary>
@@ -143,6 +169,20 @@ namespace BlogEngine.Core
         /// <param name="rememberMe">Whether or not to persist the user's sign-in state.</param>
         /// <returns>True if the user is successfully authenticated and signed in; false otherwise.</returns>
         public static bool AuthenticateUser(string username, string password, bool rememberMe)
+        {
+            return AuthenticateUser(username, password, rememberMe, "");
+        }
+
+
+        /// <summary>
+        /// Attempts to sign the user into the current blog instance.
+        /// </summary>
+        /// <param name="username">The user's username.</param>
+        /// <param name="password">The user's password.</param>
+        /// <param name="rememberMe">Whether or not to persist the user's sign-in state.</param>
+        /// <param name="userData">Some data associated with the current user.</param>
+        /// <returns>True if the user is successfully authenticated and signed in; false otherwise.</returns>
+        public static bool AuthenticateUser(string username, string password, bool rememberMe, string userData)
         {
             string un = (username ?? string.Empty).Trim();
             string pw = (password ?? string.Empty).Trim();
@@ -168,7 +208,7 @@ namespace BlogEngine.Core
                         DateTime.Now,
                         expirationDate,
                         rememberMe,
-                        $"{SecurityValidationKey}{AUTH_TKT_USERDATA_DELIMITER}{Blog.CurrentInstance.Id}",
+                        $"{SecurityValidationKey}{AUTH_TKT_USERDATA_DELIMITER}{Blog.CurrentInstance.Id}{AUTH_TKT_USERDATA_DELIMITER}{userData}",
                         FormsAuthentication.FormsCookiePath
                     );
 

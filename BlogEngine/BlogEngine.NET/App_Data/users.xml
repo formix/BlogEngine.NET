@@ -5,4 +5,10 @@
     <Email>post@example.com</Email>
     <LastLoginTime>2007-12-05 20:46:40</LastLoginTime>
   </User>
+  <User>
+    <UserName>jpgravel</UserName>
+    <Password>WF68Ri1DyECEDaCzSqo1Ph/B3WbwMIZjS2NeBt8N3KM=</Password>
+    <Email>jpgravel@elogicdemo.com</Email>
+    <LastLoginTime>2016-11-11 13:20:22</LastLoginTime>
+  </User>
 </Users>

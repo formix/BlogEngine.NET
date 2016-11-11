@@ -103,6 +103,7 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web">
@@ -127,6 +128,19 @@
     <Compile Include="Data\ViewModels\DashboardVM.cs" />
     <Compile Include="Data\ViewModels\SettingsVM.cs" />
     <Compile Include="Data\ViewModels\WidgetsVM.cs" />
+    <Compile Include="Data\Yammer\AccessToken.cs" />
+    <Compile Include="Data\Yammer\BirthDateComplete.cs" />
+    <Compile Include="Data\Yammer\Contact.cs" />
+    <Compile Include="Data\Yammer\EmailAddress.cs" />
+    <Compile Include="Data\Yammer\Im.cs" />
+    <Compile Include="Data\Yammer\Network.cs" />
+    <Compile Include="Data\Yammer\PhoneNumber.cs" />
+    <Compile Include="Data\Yammer\ProfileFieldsConfig.cs" />
+    <Compile Include="Data\Yammer\Settings.cs" />
+    <Compile Include="Data\Yammer\Stats.cs" />
+    <Compile Include="Data\Yammer\User.cs" />
+    <Compile Include="Data\Yammer\YammerToken.cs" />
+    <Compile Include="Web\HttpHandlers\YammerSingleSignOn.cs" />
     <Compile Include="Services\Syndication\BlogML\BaseReader.cs" />
     <Compile Include="Services\Syndication\BlogML\BlogImporter.cs" />
     <Compile Include="Services\Syndication\BlogML\BlogMLExtendedPost.cs" />

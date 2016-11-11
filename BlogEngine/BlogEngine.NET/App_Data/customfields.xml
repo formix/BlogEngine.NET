@@ -22,5 +22,5 @@
     <item customtype="THEME" objectid="Standard" blogid="96d5b379-7e1d-4dac-a6ba-1e50db561b04" key="Youtube Account" value="" attribute="" />
     <item customtype="THEME" objectid="Standard" blogid="96d5b379-7e1d-4dac-a6ba-1e50db561b04" key="Github Account" value="" attribute="" />
     <item customtype="THEME" objectid="Standard" blogid="96d5b379-7e1d-4dac-a6ba-1e50db561b04" key="Pinterest Account" value="" attribute="" />
-    <item customtype="THEME" objectid="Standard" blogid="96d5b379-7e1d-4dac-a6ba-1e50db561b04" key="Home Alert Box (true or false?)" value="true" attribute="" />
+    <item customtype="THEME" objectid="Standard" blogid="96d5b379-7e1d-4dac-a6ba-1e50db561b04" key="Home Alert Box (true or false?)" value="false" attribute="" />
 </CustomFields>

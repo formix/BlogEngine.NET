@@ -40,6 +40,17 @@
             get { return _name; }
         }
 
+
+        private string _userData;
+        /// <summary>
+        /// Token used for single signon with Yammer.
+        /// </summary>
+        public string UserData
+        {
+            get { return _userData; }
+            set { _userData = value; }
+        }
+
         /// <summary>
         /// Creates a new intance using the specified username and isAuthenticated bit.
         /// </summary>
