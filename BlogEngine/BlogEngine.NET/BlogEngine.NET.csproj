@@ -144,7 +144,6 @@
     <Content Include="admin\themes\standard\img\logo-sidebar.png" />
     <Content Include="admin\themes\standard\img\profile.png" />
     <Content Include="App_Data\datastore\widgets\deb9fd7c-e0f4-4f24-964d-d5f67332bab0.xml" />
-    <Content Include="App_Data\posts\f39c3289-e861-48f7-a4b7-edaaffe6f6dc.xml" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\blog\icon-left.svg" />
@@ -549,6 +548,7 @@
     <Content Include="Custom\Controls\Defaults\CommentView.ascx" />
     <Content Include="Custom\Controls\Defaults\PostView.ascx" />
     <Content Include="Custom\Media\sample.flv" />
+    <Content Include="Custom\Themes\eLogic\elogic-logo.png" />
     <Content Include="Custom\Themes\Standard-2015\CommentForm.ascx" />
     <Content Include="Custom\Themes\Standard-2015\CommentView.ascx" />
     <Content Include="Custom\Themes\Standard-2015\css\rtl.css" />
@@ -792,6 +792,7 @@
     <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.woff" />
     <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.woff2" />
     <Content Include="Custom\Themes\Standard\src\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\eLogicVoices - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1635,6 +1636,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Web.sitemap" />
+    <None Include="Web.Secret.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\account.css" />
@@ -2452,6 +2454,7 @@
     <Folder Include="App_Data\datastore\extensions\" />
     <Folder Include="App_Data\files\" />
     <Folder Include="App_Data\packages\" />
+    <Folder Include="App_Data\posts\" />
     <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>

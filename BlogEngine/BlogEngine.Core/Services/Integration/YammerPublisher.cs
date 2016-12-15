@@ -34,7 +34,7 @@ namespace BlogEngine.Core.Services.Integration
             {
                 var tags = CreateTags(post);
                 var message = new YammerMessage(
-                    $"{messageIntro} '{post.Title}' at {postLink}. Please give me your feedbacks!{tags}");
+                    $"{messageIntro} '{post.Title}'. Please give me your feedbacks!\n{postLink}\n{tags}");
 
                 var request = WebRequest
                     .Create(MESSAGE_API_URL);

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <categories>
-    <category id="f6342e69-d9fd-40f1-a6f5-3122b60eab07" description="Selecting this category makes will make that post publicly available in eLogic' public feed. Removing this category will remove that post from the public space." parent="">Public</category>
+    <category id="f6342e69-d9fd-40f1-a6f5-3122b60eab07" description="Selecting this category will make that post publicly available in eLogic' public feed. Removing this category will remove that post from the public space." parent="">Public</category>
 </categories>

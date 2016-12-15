@@ -46,7 +46,7 @@ namespace BlogEngine.Core
         /// The <see cref="System.EventArgs"/> instance containing the event data.
         /// </param>
         private static void ContextAuthenticateRequest(object sender, EventArgs e)
-        {
+        { 
             // default to an empty/unauthenticated user to assign to context.User.
             CustomIdentity identity = new CustomIdentity(string.Empty, false);
             CustomPrincipal principal = new CustomPrincipal(identity);
@@ -67,7 +67,7 @@ namespace BlogEngine.Core
                 // unauthenticated request are not allowed
                 var authUrl = string.Format(
                     "https://www.yammer.com/oauth2/authorize?client_id={0}&response_type=code&redirect_uri=https://elogicvoices.azurewebsites.net/login.sso?returnUrl={1}",
-                    YammerSingleSignOn.ClientId,
+                YammerSingleSignOn.ClientId,
                     context.Request.Url.AbsolutePath);
                 context.Response.Redirect(authUrl);
                 context.Response.End();
@@ -263,7 +263,7 @@ namespace BlogEngine.Core
             }
         }
 
-        #region "Properties"
+#region "Properties"
 
         /// <summary>
         /// If the current user is authenticated, returns the current MembershipUser. If not, returns null. This is just a shortcut to Membership.GetUser().
@@ -323,9 +323,9 @@ namespace BlogEngine.Core
             return Right.GetRights(Security.GetCurrentUserRoles());
         }
 
-        #endregion
+#endregion
 
-        #region "Public Methods"
+#region "Public Methods"
 
         /// <summary>
         /// If the current user does not have the requested right, either redirects to the login page,
@@ -479,9 +479,9 @@ namespace BlogEngine.Core
             return IsAuthorizedTo(authCheck, rights.ToList());
         }
 
-        #endregion
+#endregion
 
-        #region "Methods"
+#region "Methods"
 
         /// <summary>
         /// Helper method that returns the correct roles based on authentication.
@@ -524,7 +524,7 @@ namespace BlogEngine.Core
             return true;
         }
 
-        #endregion
+#endregion
     }
 
 
