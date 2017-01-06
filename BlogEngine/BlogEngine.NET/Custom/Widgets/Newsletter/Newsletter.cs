@@ -88,7 +88,7 @@ namespace BlogEngine.NET.Custom.Widgets
                         }
                         catch (Exception ex)
                         {
-                            Utils.Log("Custom.Widgets.Newsletter.SendEmails", ex);
+                            Utils.LogError("Custom.Widgets.Newsletter.SendEmails", ex);
                         }
                     }
                 }
@@ -116,7 +116,7 @@ namespace BlogEngine.NET.Custom.Widgets
             }
             catch (Exception ex)
             {
-                Utils.Log("Custom.Widgets.Newsletter.GetXml", ex);
+                Utils.LogError("Custom.Widgets.Newsletter.GetXml", ex);
             }
             return doc;
         }
@@ -156,7 +156,7 @@ namespace BlogEngine.NET.Custom.Widgets
                 }
                 else
                 {
-                    Utils.Log(
+                    Utils.LogWarn(
                         "When sending newsletter, newsletter.html does not exist " +
                         "in theme folder, and does not exist in the Standard theme " +
                         "folder.");

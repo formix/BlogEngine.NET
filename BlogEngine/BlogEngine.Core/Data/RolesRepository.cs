@@ -83,7 +83,7 @@ namespace BlogEngine.Core.Data
                 }
                 catch (Exception ex)
                 {
-                    Utils.Log(string.Format("Error adding role", ex));
+                    Utils.LogError("Error adding role", ex);
                     throw new ApplicationException("Error adding new role");
                 }
             }
@@ -131,7 +131,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error deleting role", ex);
+                Utils.LogError("Error deleting role", ex);
                 return false;
             }
         }

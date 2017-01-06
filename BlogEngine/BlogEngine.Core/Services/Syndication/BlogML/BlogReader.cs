@@ -84,7 +84,7 @@
             catch (Exception ex)
             {
                 Message = $"BlogReader.Import: BlogML could not load with 2.0 specs. {ex.Message}";
-                Utils.Log(Message);
+                Utils.LogWarn(Message);
                 return false;
             }
 
@@ -102,8 +102,7 @@
             }
             catch (Exception ex)
             {
-                Message = $"BlogReader.Import: {ex.Message}";
-                Utils.Log(Message);
+                Utils.LogError("BlogReader.Import", ex);
                 return false;
             }
 
@@ -355,7 +354,7 @@
         private void LoadBlogPosts()
         {
             var bi = new BlogImporter();
-            Utils.Log("BlogReader.LoadBlogPosts: Start importing posts");
+            Utils.LogInfo("BlogReader.LoadBlogPosts: Start importing posts");
 
             foreach (BlogMlExtendedPost extPost in blogsExtended)
             {
@@ -389,16 +388,16 @@
                     }
                     else
                     {
-                        Utils.Log("Post '{0}' has been skipped" + extPost.BlogPost.Title);
+                        Utils.LogInfo("Post '{0}' has been skipped" + extPost.BlogPost.Title);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Utils.Log("BlogReader.LoadBlogPosts: " + ex.Message);
+                    Utils.LogError("BlogReader.LoadBlogPosts", ex);
                 }
             }
             bi.ForceReload();
-            Utils.Log($"BlogReader.LoadBlogPosts: Completed importing {PostCount} posts");
+            Utils.LogInfo($"BlogReader.LoadBlogPosts: Completed importing {PostCount} posts");
         }
 
         #endregion

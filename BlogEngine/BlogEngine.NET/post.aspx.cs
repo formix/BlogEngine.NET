@@ -209,7 +209,7 @@ public partial class post : BlogBasePage
                 }
                 catch (Exception ex)
                 {
-                    Utils.Log("Error loading PostNavigation template", ex);
+                    Utils.LogError("Error loading PostNavigation template", ex);
                 }
             }
 		}

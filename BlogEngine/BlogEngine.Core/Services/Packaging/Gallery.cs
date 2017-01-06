@@ -67,7 +67,7 @@ namespace BlogEngine.Core.Packaging
             }
             catch (Exception ex)
             {
-                Utils.Log("BlogEngine.Core.Packaging.Load", ex);
+                Utils.LogError("BlogEngine.Core.Packaging.Load", ex);
             }   
         }
 
@@ -137,7 +137,7 @@ namespace BlogEngine.Core.Packaging
             }
             catch (Exception ex)
             {
-                Utils.Log("Error rating package", ex);
+                Utils.LogError("Error rating package", ex);
                 return ex.Message;
             }
         }

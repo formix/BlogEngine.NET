@@ -766,7 +766,7 @@ namespace BlogEngine.Core
             }
             catch (Exception ex)
             {   
-                Utils.Log("Blog.CreateNewBlog", ex);
+                Utils.LogError("Blog.CreateNewBlog", ex);
                 message = "Failed to create new blog. Error: " + ex.Message;
                 return null;
             }
@@ -930,7 +930,7 @@ namespace BlogEngine.Core
             }
             catch (Exception ex)
             {
-                Utils.Log("Blog.DeleteBlogFolder", ex);
+                Utils.LogError("Blog.DeleteBlogFolder", ex);
                 return false;
             }
 
@@ -959,7 +959,7 @@ namespace BlogEngine.Core
             }
             catch (Exception ex)
             {
-                Utils.Log("Blog.CreateNewBlogFromExisting", ex);
+                Utils.LogError("Blog.CreateNewBlogFromExisting", ex);
                 throw;  // re-throw error so error message bubbles up.
             }
 
@@ -980,7 +980,7 @@ namespace BlogEngine.Core
             }
             catch (Exception ex)
             {
-                Utils.Log("Blog.CopyExistingBlogFolderToNewBlogFolder", ex);
+                Utils.LogError("Blog.CopyExistingBlogFolderToNewBlogFolder", ex);
                 throw;  // re-throw error so error message bubbles up.
             }
             if (!Utils.CreateDirectoryIfNotExists(newBlogStoragePath))
@@ -1002,7 +1002,7 @@ namespace BlogEngine.Core
             }
             catch (Exception ex)
             {
-                Utils.Log("Blog.CopyExistingBlogFolderToNewBlogFolder", ex);
+                Utils.LogError("Blog.CopyExistingBlogFolderToNewBlogFolder", ex);
                 throw;  // re-throw error so error message bubbles up.
             }
 

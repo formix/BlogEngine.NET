@@ -343,7 +343,7 @@ namespace BlogEngine.Core.Providers
             }
             catch (Exception ex)
             {
-                Utils.Log("File Provider FileToByArray", ex);
+                Utils.LogError("File Provider FileToByArray", ex);
             }
 
             return Buffer;

@@ -416,9 +416,12 @@
                 if (this.Parameters[i].KeyField && IsKeyValueExists(values[i]))
                 {
                     string err = $"Dupliate value of '{values[i]}' not allowed for parameter '{Parameters[i].Label}'";
-                    Utils.Log(err);
 
-                    throw new ApplicationException(err);   
+                    var ex = new ApplicationException(err);
+
+                    Utils.LogError(ex);
+
+                    throw ex;
                 }
                 this.Parameters[i].AddValue(values[i]);
             }
@@ -442,9 +445,8 @@
                 if (IsKeyValueExists(values[i]))
                 {
                     string err = $"Dupliate value of '{values[i]}' not allowed for parameter '{Parameters[i].Label}'";
-                    Utils.Log(err);
-
-                    throw new ApplicationException(err);   
+                    var ex = new ApplicationException(err);
+                    Utils.LogError(ex);
                 }
                 this.Parameters[i].AddValue(values[i]);
             }

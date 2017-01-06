@@ -79,7 +79,7 @@
                 }
 
                 ExtensionManager.SaveSettings("MetaExtension", filters);
-                Utils.Log(log);
+                Utils.LogInfo(log);
             }
 
             // add value to filters
@@ -91,7 +91,7 @@
             filters.AddValues(f);
             ExtensionManager.SaveSettings("MetaExtension", filters);
 
-            Utils.Log($"{subject} added to {blackWhiteList} list: {value}");
+            Utils.LogInfo($"{subject} added to {blackWhiteList} list: {value}");
         }
 
         /// <summary>
@@ -538,7 +538,7 @@
                     comment.IsApproved = false;
                     comment.ModeratedBy = filterName;
 
-                    Utils.Log($"Custom filter [{filterName}] - found spam; comment id: {comment.Id}");
+                    Utils.LogWarn($"Custom filter [{filterName}] - found spam; comment id: {comment.Id}");
 
                     UpdateCustomFilter(filterName, false);
                     break;

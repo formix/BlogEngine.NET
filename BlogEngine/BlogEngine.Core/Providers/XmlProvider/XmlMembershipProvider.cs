@@ -851,7 +851,7 @@
 
                         if (!File.Exists(path))
                         {
-                            Utils.Log($"XmlMembershipProvider: can not read users from file \"{path}\"");
+                            Utils.LogWarn($"XmlMembershipProvider: can not read users from file \"{path}\"");
                         }
 
                         ReadFromFile(path, b.Id);

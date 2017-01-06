@@ -30,7 +30,7 @@ public class NewsFeedController : ApiController
         }
         catch (Exception ex)
         {
-            BlogEngine.Core.Utils.Log("Dashboard news feed", ex);
+            BlogEngine.Core.Utils.LogError("Dashboard news feed", ex);
         }
         return items;
     }

@@ -53,7 +53,7 @@ namespace BlogEngine.Core
 
             var context = ((HttpApplication)sender).Context;
 
-            if (context.Request.Url.AbsolutePath.Contains("login.sso"))
+            if (context.Request.Url.AbsolutePath.Contains("login.axd"))
             {
                 context.User = principal;
                 return;
@@ -64,10 +64,15 @@ namespace BlogEngine.Core
 
             if (authCookie == null)
             {
+                //http://localhost:64079/
                 // unauthenticated request are not allowed
                 var authUrl = string.Format(
-                    "https://www.yammer.com/oauth2/authorize?client_id={0}&response_type=code&redirect_uri=https://elogicvoices.azurewebsites.net/login.sso?returnUrl={1}",
-                YammerSingleSignOn.ClientId,
+#if !DEBUG
+                    "https://www.yammer.com/oauth2/authorize?client_id={0}&response_type=code&redirect_uri=https://elogicvoices.azurewebsites.net/login.axd?returnUrl={1}",
+#else
+                    "https://www.yammer.com/oauth2/authorize?client_id={0}&response_type=code&redirect_uri=https://nowhere.com/login.axd?returnUrl={1}",
+#endif
+                    YammerSingleSignOn.ClientId,
                     context.Request.Url.AbsolutePath);
                 context.Response.Redirect(authUrl);
                 context.Response.End();
@@ -86,7 +91,7 @@ namespace BlogEngine.Core
                 context.Request.Cookies.Remove(FormsAuthCookieName);
                 authTicket = null;
 
-                Utils.Log("Failed to decrypt the FormsAuthentication cookie.", ex);
+                Utils.LogError("Failed to decrypt the FormsAuthentication cookie.", ex);
             }
 
             if (authTicket != null)

@@ -10,7 +10,7 @@ namespace BlogEngine.NET.AppCode.Api
         {
             if (context.Exception is UnauthorizedAccessException) { return; }
 
-            Utils.Log("{0} {1}: {2}", context.Request.Method, context.Request.RequestUri, context.Exception.Message);
+            Utils.LogError($"{context.Request.Method} {context.Request.RequestUri}", context.Exception);
         }
     }
 }

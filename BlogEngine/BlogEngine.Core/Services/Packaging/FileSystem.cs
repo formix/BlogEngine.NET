@@ -31,7 +31,7 @@ namespace BlogEngine.Core.Packaging
             }
             catch (Exception ex)
             {
-                Utils.Log(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                Utils.LogError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
                 return null;
             }
         }
@@ -48,7 +48,7 @@ namespace BlogEngine.Core.Packaging
             }
             catch (Exception ex)
             {
-                Utils.Log(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                Utils.LogError(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
                 return null;
             }
         }
@@ -153,7 +153,7 @@ namespace BlogEngine.Core.Packaging
 
             if (installedFiles.Count == 0)
             {
-                Utils.Log($"Can not find any files installed for package: {pkgId}");
+                Utils.LogWarn($"Can not find any files installed for package: {pkgId}");
                 throw new ApplicationException("No files to uninstall");
             }
 
@@ -184,7 +184,7 @@ namespace BlogEngine.Core.Packaging
                             }
                             catch (Exception ex)
                             {
-                                Utils.Log("Error deleting directory " + fullPath + "; " + ex.Message);
+                                Utils.LogError("Error deleting directory " + fullPath, ex);
                             }
                         }
                     }
@@ -419,7 +419,7 @@ namespace BlogEngine.Core.Packaging
 
             if (cnt > 0 && cnt != content.Length)
             {
-                Utils.Log($"Package Installer: replacing in {filePath} from {searchText} to {replaceText}");
+                Utils.LogInfo($"Package Installer: replacing in {filePath} from {searchText} to {replaceText}");
             }
 
             StreamWriter writer = new StreamWriter(filePath);
@@ -495,7 +495,7 @@ namespace BlogEngine.Core.Packaging
             }
             catch (Exception ex)
             {
-                Utils.Log("Packaging.FileSystem.GetPackageManifest", ex);
+                Utils.LogError("Packaging.FileSystem.GetPackageManifest", ex);
             }
             return null;
         }

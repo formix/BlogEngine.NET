@@ -179,7 +179,7 @@
 
             if (!File.Exists(fileName))
             {
-                Utils.Log($"XmlBlogProvider: can not load profile from \"{fileName}\"");
+                Utils.LogWarn($"XmlBlogProvider: can not load profile from \"{fileName}\"");
                 return null;
             }
 

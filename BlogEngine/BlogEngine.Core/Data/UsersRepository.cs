@@ -215,7 +215,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error deleting user", ex.Message);
+                Utils.LogError("Error deleting user", ex);
                 return false;
             }
             return true;
@@ -317,7 +317,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error editing profile", ex);
+                Utils.LogError("Error editing profile", ex);
                 return false;
             }
             return true;
@@ -345,7 +345,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error updating user roles", ex);
+                Utils.LogError("Error updating user roles", ex);
                 return false;
             }
         }

@@ -65,7 +65,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("CommentFilterRepository.Find(): " + ex.Message);
+                Utils.LogError("CommentFilterRepository.Find()", ex);
             }
             return filterList;
         }
@@ -130,7 +130,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error adding new comment filter", ex);
+                Utils.LogError("Error adding new comment filter", ex);
                 throw;
             }
         }
@@ -168,7 +168,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error removing all comment filters", ex);
+                Utils.LogError("Error removing all comment filters", ex);
                 throw;
             }
 

@@ -550,13 +550,13 @@ namespace App_Code.Extensions
 
             if (comment.IsApproved)
             {
-                Utils.Log(
+                Utils.LogInfo(
                     $"Akismet: Reporting NOT spam from \"{comment.Author}\" at \"{comment.IP}\"");
                 Api.SubmitHam(akismetComment);
             }
             else
             {
-                Utils.Log($"Akismet: Reporting SPAM from \"{comment.Author}\" at \"{comment.IP}\"");
+                Utils.LogInfo($"Akismet: Reporting SPAM from \"{comment.Author}\" at \"{comment.IP}\"");
                 Api.SubmitSpam(akismetComment);
             }
         }

@@ -62,7 +62,7 @@ namespace BlogEngine.Core.Web
                 }
                 catch (Exception ex)
                 {
-                    Utils.Log("Error loading admin labels from App_Data/labels.txt", ex);
+                    Utils.LogError("Error loading admin labels from App_Data/labels.txt", ex);
                 }
             }
             else

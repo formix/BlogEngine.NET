@@ -163,7 +163,7 @@ namespace BlogEngine.Core.Data
                     }
                     catch (Exception)
                     {
-                        Utils.Log("Error parsing parent ID while saving page");
+                        Utils.LogWarn("Error parsing parent ID while saving page");
                     }
                 }
             }

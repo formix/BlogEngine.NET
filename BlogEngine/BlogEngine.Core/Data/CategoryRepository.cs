@@ -115,7 +115,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log($"CategoryRepository.Add: {ex.Message}");
+                Utils.LogError($"CategoryRepository.Add", ex);
                 return null;
             }
         }
@@ -172,7 +172,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log($"CategoryRepository.Remove: {ex.Message}");
+                Utils.LogError($"CategoryRepository.Remove", ex);
                 return false;
             }
         }
@@ -220,7 +220,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error updating category: ", ex);
+                Utils.LogError("Error updating category: ", ex);
             }
         }
 

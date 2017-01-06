@@ -1311,7 +1311,7 @@
                     }
                     catch (Exception e)
                     {
-                        Utils.Log($"Error loading blog settings: {e.Message}");
+                        Utils.LogError($"Error loading blog settings", e);
                     }
                 }
 

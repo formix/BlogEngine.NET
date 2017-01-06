@@ -434,7 +434,7 @@ namespace BlogEngine.Core.Providers
 
             if (!copyResult)
             {
-                Utils.Log("DbBlogProvider.SetupBlogFromExistingBlog", new Exception("Unsuccessful result from newBlog.CopyExistingBlogFolderToNewBlogFolder."));
+                Utils.LogError("DbBlogProvider.SetupBlogFromExistingBlog", new Exception("Unsuccessful result from newBlog.CopyExistingBlogFolderToNewBlogFolder."));
                 return false;
             }
 
@@ -699,7 +699,7 @@ namespace BlogEngine.Core.Providers
 
             if (!copyResult)
             {
-                Utils.Log("DbBlogProvider.SetupNewBlog", new Exception("Unsuccessful result from BlogGenerator.CopyTemplateBlogFolder."));
+                Utils.LogError("DbBlogProvider.SetupNewBlog", new Exception("Unsuccessful result from BlogGenerator.CopyTemplateBlogFolder."));
                 return false;
             }
 

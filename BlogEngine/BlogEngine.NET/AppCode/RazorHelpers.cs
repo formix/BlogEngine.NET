@@ -43,22 +43,22 @@ public static class RazorHelpers
                     }
                     else
                     {
-                        Utils.Log($"Unable to cast the instantiated object as a control: {typeName}");
+                        Utils.LogWarn($"Unable to cast the instantiated object as a control: {typeName}");
                     }
                 }
                 else
                 {
-                    Utils.Log($"Unable to activate control: {typeName}");
+                    Utils.LogWarn($"Unable to activate control: {typeName}");
                 }
             }
             else
             {
-                Utils.Log($"Unable to load control type: {typeName}");
+                Utils.LogWarn($"Unable to load control type: {typeName}");
             }
         }
         catch (Exception ex)
         {
-            Utils.Log($"Unable to load control: {typeName}", ex);
+            Utils.LogError($"Unable to load control: {typeName}", ex);
         }
 
         return HttpUtility.HtmlEncode($"ERROR - UNABLE TO LOAD CONTROL : {typeName}");
@@ -79,12 +79,12 @@ public static class RazorHelpers
             }
             else
             {
-                Utils.Log($"Page is null when trying to render control: {controlVirtualPath}");
+                Utils.LogError($"Page is null when trying to render control: {controlVirtualPath}");
             }
         }
         catch (Exception ex)
         {
-            Utils.Log($"Unable to load control: {controlVirtualPath}", ex);
+            Utils.LogError($"Unable to load control: {controlVirtualPath}", ex);
         }
 
         return HttpUtility.HtmlEncode($"ERROR - UNABLE TO LOAD CONTROL : {controlVirtualPath}");
@@ -144,7 +144,7 @@ public static class RazorHelpers
         }
         catch (Exception ex)
         {
-            Utils.Log($"Unable to load control: {control.GetType()}", ex);
+            Utils.LogError($"Unable to load control: {control.GetType()}", ex);
         }
 
         return HttpUtility.HtmlEncode($"ERROR - UNABLE TO LOAD CONTROL : {control.GetType()}");
@@ -194,7 +194,7 @@ public static class RazorHelpers
         }
         catch (Exception ex)
         {
-            Utils.Log($"RazorHelper, ParseRazor, VirtualPath: {virtualPath}", ex);
+            Utils.LogError($"RazorHelper, ParseRazor, VirtualPath: {virtualPath}", ex);
 
             // return the error message since it will usually contain parsing
             // details when the Razor markup/syntax is invalid.  this will help

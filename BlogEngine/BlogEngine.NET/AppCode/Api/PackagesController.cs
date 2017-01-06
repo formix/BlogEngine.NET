@@ -77,7 +77,7 @@ public class PackagesController : ApiController
         }
         catch (System.Exception ex)
         {
-            BlogEngine.Core.Utils.Log("Error processing package", ex);
+            BlogEngine.Core.Utils.LogError("Error processing package", ex);
             throw new HttpResponseException(HttpStatusCode.InternalServerError);
         }
     }
@@ -96,7 +96,7 @@ public class PackagesController : ApiController
         }
         catch (Exception ex)
         {
-            BlogEngine.Core.Utils.Log("Error updating package", ex);
+            BlogEngine.Core.Utils.LogError("Error updating package", ex);
             throw new HttpResponseException(HttpStatusCode.InternalServerError);
         }
     }
@@ -143,7 +143,7 @@ public class PackagesController : ApiController
         }
         catch (Exception ex)
         {
-            BlogEngine.Core.Utils.Log("Error refreshing gallery cache", ex);
+            BlogEngine.Core.Utils.LogError("Error refreshing gallery cache", ex);
             throw new HttpResponseException(HttpStatusCode.InternalServerError);
         }
     }

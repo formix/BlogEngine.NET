@@ -56,11 +56,11 @@ namespace BlogEngine.Core.Packaging
 
                 CustomFieldsParser.ClearCache();
 
-                Utils.Log($"Installed package {pkgId} by {Security.CurrentUser.Identity.Name}");
+                Utils.LogInfo($"Installed package {pkgId} by {Security.CurrentUser.Identity.Name}");
             }
             catch (Exception ex)
             {
-                Utils.Log("BlogEngine.Core.Packaging.Installer.InstallPackage(" + pkgId + ")", ex);
+                Utils.LogError("BlogEngine.Core.Packaging.Installer.InstallPackage(" + pkgId + ")", ex);
                 UninstallPackage(pkgId);
                 throw;
             }
@@ -90,11 +90,11 @@ namespace BlogEngine.Core.Packaging
                 // reset cache
                 Blog.CurrentInstance.Cache.Remove(Constants.CacheKey);
 
-                Utils.Log($"Uninstalled package {pkgId} by {Security.CurrentUser.Identity.Name}");
+                Utils.LogInfo($"Uninstalled package {pkgId} by {Security.CurrentUser.Identity.Name}");
             }
             catch (Exception ex)
             {
-                Utils.Log($"Error unistalling package {pkgId}: {ex.Message}");
+                Utils.LogError($"Error unistalling package {pkgId}", ex);
                 throw;
             }
 

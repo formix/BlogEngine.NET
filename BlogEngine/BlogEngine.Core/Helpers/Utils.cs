@@ -23,6 +23,7 @@
     using BlogEngine.Core.Web.Controls;
     using BlogEngine.Core.Web.Extensions;
     using System.Net.Sockets;
+    using NLog;
 
     /// <summary>
     /// Utilities for the entire solution to use.
@@ -481,7 +482,7 @@
             }
             catch (Exception ex)
             {
-                Log("Error loading compiled assemblies: " + ex.Message);
+                LogError("Error loading compiled assemblies", ex);
             }
 
             return codeAssemblies;
@@ -941,7 +942,7 @@
         /// <param name="message">
         /// The message to be logged.
         /// </param>
-        public static void Log(object message)
+        private static void Log(object message)
         {
             if (OnLog != null)
             {
@@ -952,25 +953,62 @@
         /// <summary>
         /// Sends a message to any subscribed log listeners.
         /// </summary>
-        /// <param name="format">A format string</param>
-        /// <param name="args">Arguments to replace in the format string</param>
-		public static void Log(string format, params object[] args)
-		{
-			if (OnLog != null)
-			{
-				OnLog(string.Format(format, args), EventArgs.Empty);
-			}
-		}
+        /// <param name="message"></param>
+        public static void LogInfo(object message)
+        {
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Info(message);
+            Log("INFO: " + message);
+        }
+
 
         /// <summary>
         /// Sends a message to any subscribed log listeners.
         /// </summary>
-        /// <param name="methodName"></param>
-        /// <param name="ex"></param>
-        public static void Log(string methodName, Exception ex)
+        /// <param name="message">
+        /// The message to be logged.
+        /// </param>
+        public static void LogWarn(object message)
         {
-            Log($"{methodName}: {ex.Message}");
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Warn(message);
+            Log("WARN: " + message);
         }
+
+        /// <summary>
+        /// Sends a message to any subscribed log listeners.
+        /// </summary>
+        /// <param name="message"></param>
+        public static void LogError(string message)
+        {
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Error(message);
+            Log("ERROR: " + message);
+        }
+
+        /// <summary>
+        /// Sends a message to any subscribed log listeners.
+        /// </summary>
+        /// <param name="ex"></param>
+        public static void LogError(Exception ex)
+        {
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Error(ex);
+            Log("ERROR:" + ex.Message);
+        }
+
+        /// <summary>
+        /// Sends a message to any subscribed log listeners.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="ex"></param>
+        public static void LogError(string message, Exception ex)
+        {
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Error(ex, message);
+            Log("ERROR: " + message + ": " + ex.Message);
+        }
+
 
         /// <summary>
         /// Generates random password for password reset
@@ -1157,7 +1195,7 @@
                     current = current.InnerException;
                 }
 
-                Utils.Log(errorMsg.ToString());
+                Utils.LogError(errorMsg.ToString(), ex);
             }
             finally
             {
@@ -1386,7 +1424,7 @@
             }
             catch (Exception ex)
             {
-                Utils.Log("Utils.CreateDirectoryIfNotExists", ex);
+                Utils.LogError("Utils.CreateDirectoryIfNotExists", ex);
                 throw;  // re-throw error so error message bubbles up.
             }
 
@@ -1433,7 +1471,7 @@
             }
             catch (Exception ex)
             {
-                Log("Utils.Recycle() : " + ex.Message);
+                LogError("Utils.Recycle()", ex);
             }
             return false;
         }

@@ -72,7 +72,7 @@ namespace BlogEngine.Core.Data
             }
             catch (System.Exception ex)
             {
-                Utils.Log("WidgetsRepository.Update", ex);
+                Utils.LogError("WidgetsRepository.Update", ex);
                 return false;
             }
         }

@@ -663,7 +663,7 @@
             }
             catch (Exception ex)
             {
-                Utils.Log("Error adding comment form to CommentView", ex);
+                Utils.LogError("Error adding comment form to CommentView", ex);
             }
         }
 
@@ -677,7 +677,7 @@
             }
             catch (Exception ex)
             {
-                Utils.Log("AddFormToCommentView", ex);
+                Utils.LogError("AddFormToCommentView", ex);
             }
         }
 

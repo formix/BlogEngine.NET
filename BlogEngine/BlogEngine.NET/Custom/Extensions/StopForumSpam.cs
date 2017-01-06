@@ -81,7 +81,7 @@
             }
             catch (Exception e)
             {
-                Utils.Log($"Error checking stopforumspam.com: {e.Message}");
+                Utils.LogError($"Error checking stopforumspam.com", e);
                 return false;
             }
         }

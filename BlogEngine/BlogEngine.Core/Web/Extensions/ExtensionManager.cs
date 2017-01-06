@@ -507,7 +507,7 @@
                         }
                         catch (Exception e)
                         {
-                            Utils.Log($"Can not load {type.Name}: {e.Message}");
+                            Utils.LogError($"Can not load {type.Name}", e);
                         }
                     }
                 }

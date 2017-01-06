@@ -94,7 +94,7 @@ namespace App_Code.Controls
                         Text = string.Format("<p style=\"color:red\">Widget {0} not found, check log for details.<p>", widget.InnerText)
                     };
                     Controls.Add(lit);
-                    Utils.Log("WidgetZone.OnLoad", ex);
+                    Utils.LogError("WidgetZone.OnLoad", ex);
                 }
             }
         }

@@ -51,7 +51,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("CustomFilterRepository.GetCustomFilters(): " + ex.Message);
+                Utils.LogError("CustomFilterRepository.GetCustomFilters()", ex);
             }
             return filterList;
         }
@@ -85,7 +85,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log($"CustomFilterRepository.ResetCounters: {ex.Message}");
+                Utils.LogError($"CustomFilterRepository.ResetCounters", ex);
                 return new JsonResponse() { Message = "Error resetting counters" };
             }
         }

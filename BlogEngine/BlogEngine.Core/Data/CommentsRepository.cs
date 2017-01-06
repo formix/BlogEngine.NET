@@ -108,7 +108,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Core.Data.CommentsRepository.Add", ex);
+                Utils.LogError("Core.Data.CommentsRepository.Add", ex);
                 return null;
             }
         }

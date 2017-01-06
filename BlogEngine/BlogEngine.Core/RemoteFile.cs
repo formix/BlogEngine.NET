@@ -99,7 +99,7 @@ namespace BlogEngine.Core
             else if ((BlogSettings.Instance.RemoteMaxFileSize > 0) && (contentLength > BlogSettings.Instance.RemoteMaxFileSize))
             {
                 response.Close();
-                Utils.Log("An attempt to download a remote file has been halted because the file is larger than allowed.");
+                Utils.LogWarn("An attempt to download a remote file has been halted because the file is larger than allowed.");
                 return null;
             }
            

@@ -69,7 +69,7 @@ namespace BlogEngine.Core.Data.ViewModels
             }
             else
             {
-                Utils.Log("Can not update BlogRoll " + id);
+                Utils.LogWarn("Can not update BlogRoll " + id);
             }
         }
         /// <summary>
@@ -89,7 +89,7 @@ namespace BlogEngine.Core.Data.ViewModels
             }
             else
             {
-                Utils.Log("Can not delete BlogRoll " + id);
+                Utils.LogWarn("Can not delete BlogRoll " + id);
             }
         }
         /// <summary>

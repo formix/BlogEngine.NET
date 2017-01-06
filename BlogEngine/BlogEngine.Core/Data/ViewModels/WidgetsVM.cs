@@ -51,7 +51,7 @@ namespace BlogEngine.Core.Data.ViewModels
                 }
             }
             catch (Exception ex) {
-                Utils.Log(ex.Message);
+                Utils.LogError(ex);
             }
         }
         /// <summary>

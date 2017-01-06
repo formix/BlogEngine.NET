@@ -73,7 +73,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error adding custom field", ex);
+                Utils.LogError("Error adding custom field", ex);
                 throw;
             }
         }
@@ -97,7 +97,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error updaging custom field", ex);
+                Utils.LogError("Error updaging custom field", ex);
                 return false;
             }
         }
@@ -129,7 +129,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error updaging custom field", ex);
+                Utils.LogError("Error updaging custom field", ex);
                 return false;
             }
         }
@@ -151,7 +151,7 @@ namespace BlogEngine.Core.Data
             }
             catch (Exception ex)
             {
-                Utils.Log("Error updaging custom field", ex);
+                Utils.LogError("Error updaging custom field", ex);
             }
         }
 

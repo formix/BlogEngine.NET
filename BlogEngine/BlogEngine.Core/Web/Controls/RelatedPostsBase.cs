@@ -62,7 +62,7 @@ namespace BlogEngine.Core.Web.Controls
                 }
                 catch (Exception ex)
                 {
-                    Utils.Log("Error getting related posts", ex);
+                    Utils.LogError("Error getting related posts", ex);
                     return new List<RelatedPost>();
                 }
             }
